@@ -1,0 +1,82 @@
+package com.example.customlist;
+
+import android.annotation.SuppressLint;
+import android.app.ListActivity;
+import android.content.Context;
+import android.content.res.Resources;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+public class MainActivity extends ListActivity {
+	@SuppressLint("ViewHolder")
+	public class ImageTextListAdapter  extends BaseAdapter
+	{
+		Context context;
+		String[] values;
+		
+		public ImageTextListAdapter(Context context,String[] values)
+		{
+			this.context = context;
+			this.values = values;
+		}
+		
+		@Override
+		public int getCount() {
+			// TODO Auto-generated method stub
+			return 0;
+		}
+
+		@Override
+		public Object getItem(int arg0) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public long getItemId(int arg0) {
+			// TODO Auto-generated method stub
+			return 0;
+		}
+
+		@SuppressLint("ViewHolder")
+		@Override
+		public View getView(int position,  View view, ViewGroup parent) {
+		    
+			LayoutInflater inflater=getLayoutInflater();
+			 View row=inflater.inflate(R.layout.row, parent, false);
+		        View rowView = inflater.inflate(R.layout.row, parent, false);
+		        TextView textView = (TextView) rowView.findViewById(R.id.country);
+		        ImageView imageView = (ImageView) rowView.findViewById(R.id.icon);
+		        textView.setText(values[position]);
+		        String s = values[position];
+		        if (!s.startsWith("Ireland")) {
+			          imageView.setImageResource(R.drawable.icon);
+		        }
+
+		        return rowView;
+		}
+
+	}
+	
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        Resources res = getResources();
+        setListAdapter(new ImageTextListAdapter(this,res.getStringArray(R.array.countries)));
+    }
+    
+    protected void onListItemClick(ListView l, View v,int position, long id)
+    {
+    	String message = l.getItemAtPosition(position).toString();
+    	
+    	Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
+    }
+}

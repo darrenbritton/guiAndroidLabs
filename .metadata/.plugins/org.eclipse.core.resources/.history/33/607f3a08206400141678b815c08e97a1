@@ -1,0 +1,78 @@
+package com.example.customlist;
+
+import android.app.Activity;
+import android.app.ListActivity;
+import android.content.Context;
+import android.content.res.Resources;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+public class MainActivity extends ListActivity {
+
+	public class ImageTextListAdapter  extends BaseAdapter
+	{
+		@Override
+		public int getCount() {
+			// TODO Auto-generated method stub
+			return 0;
+		}
+
+		@Override
+		public Object getItem(int arg0) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public long getItemId(int arg0) {
+			// TODO Auto-generated method stub
+			return 0;
+		}
+
+		@Override
+		public View getView(int position,  View view, ViewGroup parent) {
+		    
+			Resources res = getResources();
+			String[] values = res.getStringArray(R.array.countries);
+			LayoutInflater inflater=getLayoutInflater();
+			 View row=inflater.inflate(R.layout.row, parent, false);
+		        View rowView = inflater.inflate(R.layout.row, parent, false);
+		        TextView textView = (TextView) rowView.findViewById(R.id.country);
+		        ImageView imageView = (ImageView) rowView.findViewById(R.id.icon);
+		        textView.setText(values[position]);
+		        // change the icon for Windows and iPhone
+		        String s = values[position];
+		        if (s.startsWith("Ireland")) {
+		          imageView.setImageResource(R.drawable.no);
+		        } else {
+		          imageView.setImageResource(R.drawable.ok);
+		        }
+
+		        return rowView;
+		}
+
+	}
+	
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        Resources res = getResources();
+        setListAdapter(new ArrayAdapter<String>(this,R.layout.row,R.id.country,res.getStringArray(R.array.countries)));
+    }
+    
+    protected void onListItemClick(ListView l, View v,int position, long id)
+    {
+    	String message = l.getItemAtPosition(position).toString();
+    	
+    	Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
+    }
+}

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">ContainersLinearLayout</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    
+    <string-array name="countries">
+        <item>Ireland</item>
+        <item>England</item>
+        <item>Wales</item>
+        <item>Scotland</item>
+        <item>Northern Ireland</item>
+        </string-array>
+
+</resources>
